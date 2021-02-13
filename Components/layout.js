@@ -9,17 +9,19 @@ export default function Layout(props) {
     return (
         <div >
             <AppBar position="static">
-                <Toolbar>
-                <Link href="/">
+                <Toolbar >
                     <>
+                    <Link href="/" style={{cursor:'pointer'}}>
                     <IconButton edge="start" color="inherit" aria-label="menu">
                         <FastfoodIcon />
                     </IconButton>
-                    <Typography variant="h5" style={{fontWeight:'bold'}}> 
+                    </Link>
+                    <Link href="/" >
+                    <Typography style={{cursor:'pointer'}} variant="h5" style={{fontWeight:'bold'}}> 
                         Receipo
                     </Typography>
+                    </Link>
                     </>
-                </Link>
                 </Toolbar>
             </AppBar>
             {props.children}

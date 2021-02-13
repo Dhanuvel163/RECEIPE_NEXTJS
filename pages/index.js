@@ -180,8 +180,8 @@ export default function Home({receipes,pages}) {
           />
           <CardContent>
             <Typography variant="body2" color="textSecondary" component="div">
-              {/* <div dangerouslySetInnerHTML={{__html: `${d.summary}`}} /> */}
-              <div dangerouslySetInnerHTML={{__html: `${d.summary?.substring(0,200)} ...`}} />
+              <div dangerouslySetInnerHTML={{__html: `${d.summary}`}} />
+              {/* <div dangerouslySetInnerHTML={{__html: `${d.summary?.substring(0,200)} ...`}} /> */}
             </Typography>
           </CardContent>
           

@@ -19,11 +19,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import EmojiFoodBeverageIcon from '@material-ui/icons/EmojiFoodBeverage';
 
-import { AutoRotatingCarousel, Slide } from "material-auto-rotating-carousel";
-import { red, blue, green } from "@material-ui/core/colors";
-import SwipeableViews from 'react-swipeable-views';
+// import SwipeableViews from 'react-swipeable-views';
 export default function Home({receipe}) {
-  console.log(receipe)
   return (
     <div>
       <Head>
@@ -106,58 +103,24 @@ export default function Home({receipe}) {
             </Container>
             <div style={{height:20}}></div>
             </Paper>
+
+            {/* <Paper elevation={0} style={{overflow:'hidden',marginTop:30}}>
+              <SwipeableViews enableMouseEvents>
+                <div >
+                  slide n°1
+                </div>
+                <div >
+                  slide n°2
+                </div>
+                <div >
+                  slide n°3
+                </div>
+              </SwipeableViews>
+            </Paper> */}
+
+
             </Container>
         </div>
-
-      {/* <AutoRotatingCarousel
-        label="Get started"
-        open={true}
-        // onClose={() => setHandleOpen({ open: false })}
-        // onStart={() => setHandleOpen({ open: false })}
-        autoplay={true}
-        // mobile={isMobile}
-        style={{ position: "static" }}
-      >
-        <Slide
-          media={
-            <img src="http://www.icons101.com/icon_png/size_256/id_79394/youtube.png" />
-          }
-          mediaBackgroundStyle={{ backgroundColor: red[400] }}
-          style={{ backgroundColor: red[600] }}
-          title="This is a very cool feature"
-          subtitle="Just using this will blow your mind."
-        />
-        <Slide
-          media={
-            <img src="http://www.icons101.com/icon_png/size_256/id_80975/GoogleInbox.png" />
-          }
-          mediaBackgroundStyle={{ backgroundColor: blue[400] }}
-          style={{ backgroundColor: blue[600] }}
-          title="Ever wanted to be popular?"
-          subtitle="Well just mix two colors and your are good to go!"
-        />
-        <Slide
-          media={
-            <img src="http://www.icons101.com/icon_png/size_256/id_76704/Google_Settings.png" />
-          }
-          mediaBackgroundStyle={{ backgroundColor: green[400] }}
-          style={{ backgroundColor: green[600] }}
-          title="May the force be with you"
-          subtitle="The Force is a metaphysical and ubiquitous power in the Star Wars fictional universe."
-        />
-      </AutoRotatingCarousel> */}
-
-  <SwipeableViews enableMouseEvents>
-    <div >
-      slide n°1
-    </div>
-    <div >
-      slide n°2
-    </div>
-    <div >
-      slide n°3
-    </div>
-  </SwipeableViews>
 
       </Layout>
     </div>
@@ -165,10 +128,15 @@ export default function Home({receipe}) {
 }
 export const getServerSideProps = async(ctx) =>{
   if(ctx.params?.id){
-    const res = await fetch(
-      `https://api.spoonacular.com/recipes/${ctx.params?.id}/information?includeNutrition=false&apiKey=${APITOKEN}`)
-    const response =await res.json()
-    return{props:{receipe:response }} 
+    const [res] = await Promise.all([
+      (await fetch(`https://api.spoonacular.com/recipes/${ctx.params?.id}/information?includeNutrition=false&apiKey=${APITOKEN}`)).json(),
+      // (await fetch(`https://api.spoonacular.com/recipes/${ctx.params?.id}/similar?apiKey=${APITOKEN}`)).json(),
+    ]) 
+    // const response =await res.json()
+    // const similar = await
+
+    // https://api.spoonacular.com/recipes/715538/similar
+    return{props:{receipe:res }} 
   }
   return{props:{receipe:{}}} 
 }
