@@ -40,7 +40,7 @@ export default function Home({receipe}) {
                     <Grid item xs={12} sm={6}>
                       <img src={receipe.image} style={{width:'100%',height:'100%'}}/>
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={6} style={{paddingLeft:30}}>
                       <h3>Diets</h3>
                       {
                         receipe.diets.map((d,i)=>(<Chip key={i} style={{marginLeft:5}} label={d} color="primary"/>))

@@ -8,7 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import { makeStyles } from '@material-ui/core/styles';
 import {APITOKEN} from '../config'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import {useRouter} from 'next/router'
 

@@ -26,6 +26,13 @@ export default function MyApp(props) {
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
+
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/sw.js").catch(err => console.error("Service worker registration failed", err))
+    } else {
+        console.log("Service worker not supported")
+    }
+
   }, []);
   return (
     <React.Fragment>
@@ -34,12 +41,12 @@ export default function MyApp(props) {
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
 
         <meta charset="utf-8" />
-        <link rel="image_src" href="%PUBLIC_URL%/logo192.png"/>
-        <link rel="icon" href="%PUBLIC_URL%/logo192.png" />
+        <link rel="image_src" href="/logo192.png"/>
+        <link rel="icon" href="/logo192.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#000000" />
-        <link rel="apple-touch-icon" href="%PUBLIC_URL%/assets/lawlogo192.webp" />
-        <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+        <link rel="apple-touch-icon" href="/assets/lawlogo192.webp" />
+        <link rel="manifest" href="/manifest.json" />
 
       </Head>
       <ThemeProvider theme={theme}>
