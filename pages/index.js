@@ -67,18 +67,16 @@ const useStylesCard = makeStyles((theme) => ({
 export default function Home({receipes,pages}) {
   const classes = useStyles();
   const router = useRouter();
-  // console.log(router)
   const classesCard = useStylesCard();
   const [expanded, setExpanded] = useState(false);
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
   let [page,setpage] = useState(parseInt(router.query?.page))
-  const handleChange = (e) => {
-    console.log(e)
-    setpage(parseInt(e.target.innerText))
+  const handleChange = (e,v) => {
+    setpage(v)
     if(router.query?.query){
-      router.push(`/?query=${router.query?.query}&page=${e.target.innerText}`)
+      router.push(`/?query=${router.query?.query}&page=${v}`)
     }
   }
   let [search,setsearch] = useState(router.query?.query)
@@ -121,14 +119,6 @@ export default function Home({receipes,pages}) {
 
       {/* {router.isFallback && <div>loading...</div>} */}
 
-      {receipes.length !== 0  &&
-      <div className={classes.alignCenter} style={{marginTop:20}}>
-        <Paper elevation={3} className={classes.alignCenter} style={{width:'fit-content',paddingTop:5,paddingBottom:5}}>
-          <Pagination hidePrevButton hideNextButton count={pages} boundaryCount={2} siblingCount={0} color="secondary" page={page} onChange={handleChange}/>
-        </Paper>
-      </div>      
-      }
-
       {receipes.length === 0  &&
       <div className={classes.alignCenter} style={{marginTop:20}}>
         <div>
@@ -138,17 +128,15 @@ export default function Home({receipes,pages}) {
         </div>
       </div>      
       }
-
       {
       (!router.query?.query) &&
-        <Container>
+        <Container style={{marginTop:20}}>
           <h2 style={{color:'rgb(66, 46, 117)',fontWeight:'bold',textShadow:'0px 0px 1.3px black',textTransform:'uppercase'}}>
             Trending Receipes
           </h2>
           <Divider/>
         </Container>
       }
-
       {
       (router.query?.query) &&
         <Container>
@@ -158,6 +146,14 @@ export default function Home({receipes,pages}) {
           <Divider/>
         </Container>
       }
+      {receipes.length !== 0  &&
+      <div className={classes.alignCenter} style={{marginTop:20}}>
+        <Paper elevation={3} className={classes.alignCenter} style={{width:'fit-content',paddingTop:5,paddingBottom:5}}>
+          <Pagination count={pages} boundaryCount={2} siblingCount={0} color="secondary" page={page} onChange={handleChange}/>
+        </Paper>
+      </div>      
+      }
+
 
       <Grid container style={{marginTop:20}}>
         {receipes.map((d,i)=>(
@@ -218,7 +214,7 @@ export default function Home({receipes,pages}) {
       {receipes.length !== 0  &&
       <div className={classes.alignCenter} style={{marginTop:20}}>
         <Paper elevation={3} className={classes.alignCenter} style={{width:'fit-content',paddingTop:5,paddingBottom:5}}>
-          <Pagination hidePrevButton hideNextButton count={pages} boundaryCount={2} siblingCount={0} color="secondary" page={page} onChange={handleChange}/>
+          <Pagination count={pages} boundaryCount={2} siblingCount={0} color="secondary" page={page} onChange={handleChange}/>
         </Paper>
       </div>      
       }
