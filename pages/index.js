@@ -23,8 +23,9 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
+import Link from 'next/link'
 import Pagination from '@material-ui/lab/Pagination';
+import Container from '@material-ui/core/Container';
 const useStyles = makeStyles((theme) => ({
     alignCenter:{
       display: 'flex',width: '100%',justifyContent:'center',
@@ -64,9 +65,9 @@ const useStylesCard = makeStyles((theme) => ({
 }));
 
 export default function Home({receipes,pages}) {
-  console.log(receipes)
   const classes = useStyles();
   const router = useRouter();
+  // console.log(router)
   const classesCard = useStylesCard();
   const [expanded, setExpanded] = useState(false);
   const handleExpandClick = () => {
@@ -74,6 +75,7 @@ export default function Home({receipes,pages}) {
   };
   let [page,setpage] = useState(parseInt(router.query?.page))
   const handleChange = (e) => {
+    console.log(e)
     setpage(parseInt(e.target.innerText))
     if(router.query?.query){
       router.push(`/?query=${router.query?.query}&page=${e.target.innerText}`)
@@ -122,7 +124,7 @@ export default function Home({receipes,pages}) {
       {receipes.length !== 0  &&
       <div className={classes.alignCenter} style={{marginTop:20}}>
         <Paper elevation={3} className={classes.alignCenter} style={{width:'fit-content',paddingTop:5,paddingBottom:5}}>
-          <Pagination count={pages} boundaryCount={2} siblingCount={0} color="secondary" page={page} onChange={handleChange}/>
+          <Pagination hidePrevButton hideNextButton count={pages} boundaryCount={2} siblingCount={0} color="secondary" page={page} onChange={handleChange}/>
         </Paper>
       </div>      
       }
@@ -137,12 +139,33 @@ export default function Home({receipes,pages}) {
       </div>      
       }
 
+      {
+      (!router.query?.query) &&
+        <Container>
+          <h2 style={{color:'rgb(66, 46, 117)',fontWeight:'bold',textShadow:'0px 0px 1.3px black',textTransform:'uppercase'}}>
+            Trending Receipes
+          </h2>
+          <Divider/>
+        </Container>
+      }
+
+      {
+      (router.query?.query) &&
+        <Container>
+          <h2 style={{color:'rgb(66, 46, 117)',fontWeight:'bold',textShadow:'0px 0px 1.3px black',textTransform:'uppercase'}}>
+            Results for {router.query?.query}
+          </h2>
+          <Divider/>
+        </Container>
+      }
+
       <Grid container style={{marginTop:20}}>
         {receipes.map((d,i)=>(
         <Grid key={i} item xs={12} sm={6} md={4} className={classes.alignCenter}>
 
         <Card className={classesCard.root} style={{marginTop:29}}>
-          <CardHeader
+          <Link href={`/${d.id}`}>
+          <CardHeader style={{cursor:'pointer'}}
             avatar={
               <Avatar aria-label="recipe" className={classesCard.avatar}>
                 {d.title[0]}
@@ -150,7 +173,9 @@ export default function Home({receipes,pages}) {
             }
             title={d.title}
             subheader={d?.dishTypes?.[0]}
-          />
+          />          
+          </Link>
+
           <CardMedia
             className={classesCard.media}
             image={d.image || 'https://spoonacular.com/recipeImages/157106-312x231.jpg'}
@@ -164,8 +189,8 @@ export default function Home({receipes,pages}) {
           </CardContent>
           
           {
-          // d.instructions 
-          true
+          d.instructions 
+          // true
           &&
           <>
           <CardActions disableSpacing>
@@ -193,7 +218,7 @@ export default function Home({receipes,pages}) {
       {receipes.length !== 0  &&
       <div className={classes.alignCenter} style={{marginTop:20}}>
         <Paper elevation={3} className={classes.alignCenter} style={{width:'fit-content',paddingTop:5,paddingBottom:5}}>
-          <Pagination count={pages} boundaryCount={2} siblingCount={0} color="secondary" page={page} onChange={handleChange}/>
+          <Pagination hidePrevButton hideNextButton count={pages} boundaryCount={2} siblingCount={0} color="secondary" page={page} onChange={handleChange}/>
         </Paper>
       </div>      
       }
