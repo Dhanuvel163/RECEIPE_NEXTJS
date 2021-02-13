@@ -23,12 +23,14 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
+import Pagination from '@material-ui/lab/Pagination';
 const useStyles = makeStyles((theme) => ({
     alignCenter:{
       display: 'flex',width: '100%',justifyContent:'center',
     },
     root: {
-      padding: '2px 4px',display: 'flex',alignItems: 'center',width: '60%',
+      padding: '2px 4px',display: 'flex',alignItems: 'center',width: '60%'
     },
     input: {marginLeft: theme.spacing(1),flex: 1,
     },
@@ -40,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
 
 const useStylesCard = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
+    maxWidth: 345
   },
   media: {
     height: 0,
@@ -61,7 +63,8 @@ const useStylesCard = makeStyles((theme) => ({
   },
 }));
 
-export default function Home({receipes}) {
+export default function Home({receipes,pages}) {
+  console.log(receipes)
   const classes = useStyles();
   const router = useRouter();
   const classesCard = useStylesCard();
@@ -69,15 +72,25 @@ export default function Home({receipes}) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  let [search,setsearch] = useState('')
+  let [page,setpage] = useState(parseInt(router.query?.page))
+  const handleChange = (e) => {
+    setpage(parseInt(e.target.innerText))
+    if(router.query?.query){
+      router.push(`/?query=${router.query?.query}&page=${e.target.innerText}`)
+    }
+  }
+  let [search,setsearch] = useState(router.query?.query)
   const searchFunction = () => {
-    router.push(`/?query=${search}`)
+    if(search && search.trim() != '' && search.trim() != ' '){
+      router.push(`/?query=${search}&page=1`)
+      setpage(parseInt(1))
+    }
   }
   return (
     <div>
       <Head>
         <title>Receipe App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/vercel.svg" />
       </Head>
       <Layout>
 
@@ -86,6 +99,7 @@ export default function Home({receipes}) {
             <InputBase
                 className={classes.input}
                 placeholder="Search"
+                defaultValue={search}
                 onChange={(val)=>{
                     setsearch(val.target.value)
                 }}
@@ -103,10 +117,29 @@ export default function Home({receipes}) {
         </Paper>
       </div>
 
-      {router.isFallback && <div>loading...</div>}
-      <Grid container style={{marginTop:40}}>
-        {receipes.map((d)=>(
-        <Grid key={d.title} item xs={12} sm={6} md={4} className={classes.alignCenter}>
+      {/* {router.isFallback && <div>loading...</div>} */}
+
+      {receipes.length !== 0  &&
+      <div className={classes.alignCenter} style={{marginTop:20}}>
+        <Paper elevation={3} className={classes.alignCenter} style={{width:'fit-content',paddingTop:5,paddingBottom:5}}>
+          <Pagination count={pages} boundaryCount={2} siblingCount={0} color="secondary" page={page} onChange={handleChange}/>
+        </Paper>
+      </div>      
+      }
+
+      {receipes.length === 0  &&
+      <div className={classes.alignCenter} style={{marginTop:20}}>
+        <div>
+          <h1 style={{textAlign:'center',color:'rgb(66, 46, 117)',fontWeight:'bold',textShadow:'1px 1px 3px black'}}>
+            OOPS ! NO DATA</h1>
+          <img style={{maxWidth:'100vw'}} src="/no.svg"/>
+        </div>
+      </div>      
+      }
+
+      <Grid container style={{marginTop:20}}>
+        {receipes.map((d,i)=>(
+        <Grid key={i} item xs={12} sm={6} md={4} className={classes.alignCenter}>
 
         <Card className={classesCard.root} style={{marginTop:29}}>
           <CardHeader
@@ -115,35 +148,30 @@ export default function Home({receipes}) {
                 {d.title[0]}
               </Avatar>
             }
-            // action={
-            //   <IconButton aria-label="settings">
-            //     <MoreVertIcon />
-            //   </IconButton>
-            // }
             title={d.title}
             subheader={d?.dishTypes?.[0]}
           />
           <CardMedia
             className={classesCard.media}
-            image={d.image}
+            image={d.image || 'https://spoonacular.com/recipeImages/157106-312x231.jpg'}
             title={d.title}
           />
           <CardContent>
             <Typography variant="body2" color="textSecondary" component="div">
-              <div dangerouslySetInnerHTML={{__html: `${d.summary?.substring(0,300)} ...`}} />
+              {/* <div dangerouslySetInnerHTML={{__html: `${d.summary}`}} /> */}
+              <div dangerouslySetInnerHTML={{__html: `${d.summary?.substring(0,200)} ...`}} />
             </Typography>
           </CardContent>
           
-          {d.instructions &&
+          {
+          // d.instructions 
+          true
+          &&
           <>
           <CardActions disableSpacing>
             <IconButton
-              className={clsx(classesCard.expand, {
-                [classesCard.expandOpen]: expanded,
-              })}
-              onClick={handleExpandClick}
-              aria-expanded={expanded}
-              aria-label="show more"
+              className={clsx(classesCard.expand, {[classesCard.expandOpen]: expanded,})}
+              onClick={handleExpandClick} aria-expanded={expanded} aria-label="show more"
             >
               <ExpandMoreIcon />
             </IconButton>
@@ -162,18 +190,29 @@ export default function Home({receipes}) {
         ))}
       </Grid>
 
+      {receipes.length !== 0  &&
+      <div className={classes.alignCenter} style={{marginTop:20}}>
+        <Paper elevation={3} className={classes.alignCenter} style={{width:'fit-content',paddingTop:5,paddingBottom:5}}>
+          <Pagination count={pages} boundaryCount={2} siblingCount={0} color="secondary" page={page} onChange={handleChange}/>
+        </Paper>
+      </div>      
+      }
+
       </Layout>
     </div>
   )
 }
 export const getServerSideProps = async(ctx) =>{
   if(ctx.query?.query){
-    console.log(ctx.query?.query)
-    const res = await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${ctx.query.query}&instructionsRequired=true&addRecipeInformation=true&number=12&apiKey=${APITOKEN}`)
+    // console.log(ctx.query?.query)
+    let offset = (ctx.query?.page-1)*9
+    const res = await fetch(
+      `https://api.spoonacular.com/recipes/complexSearch?query=${ctx.query.query}&offset=${offset}&
+      instructionsRequired=true&addRecipeInformation=true&number=9&apiKey=${APITOKEN}`)
     const response =await res.json()
-    return{props:{receipes:response.results}} 
+    return{props:{receipes:response.results || [],pages:(Math.ceil(response.totalResults/12))}} 
   }
-  const res = await fetch(`https://api.spoonacular.com/recipes/random?number=12&tags=vegetarian&apiKey=${APITOKEN}`)
+  const res = await fetch(`https://api.spoonacular.com/recipes/random?number=9&tags=vegetarian&apiKey=${APITOKEN}`)
   const response =await res.json()
-  return{props:{receipes:response.recipes}} 
+  return{props:{receipes:response.recipes || [],pages:1}} 
 }

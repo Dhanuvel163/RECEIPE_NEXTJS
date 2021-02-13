@@ -6,8 +6,8 @@ import FastfoodIcon from '@material-ui/icons/Fastfood';
 import IconButton from '@material-ui/core/IconButton';
 export default function Layout(props) {
     return (
-        <div>
-            <AppBar position="sticky">
+        <div >
+            <AppBar position="static">
                 <Toolbar>
                 <IconButton edge="start" color="inherit" aria-label="menu">
                     <FastfoodIcon />
@@ -18,6 +18,7 @@ export default function Layout(props) {
                 </Toolbar>
             </AppBar>
             {props.children}
+            <div style={{height:40}}></div>
         </div>
     )
 }
