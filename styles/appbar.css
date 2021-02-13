@@ -1,32 +1,13 @@
 .MuiAppBar-colorPrimary {
   background-color: black !important;
-  /* background: linear-gradient(to right, rgb(65, 41, 90), rgb(47, 7, 67)); */
-  /* background: linear-gradient(
-    178.1deg,
-    rgb(60, 55, 106) 8.5%,
-    rgb(23, 20, 69) 82.4%
-  ); */
 }
 
 .bg {
-  /* background: linear-gradient(
-    219.3deg,
-    rgb(149, 0, 199) 4.7%,
-    rgb(130, 0, 226) 22.9%,
-    rgb(95, 0, 199) 43.2%,
-    rgb(70, 0, 199) 63.9%,
-    rgb(5, 0, 199) 85.1%,
-    rgb(0, 95, 199) 106.8%
-  ); */
   background: linear-gradient(
     109.6deg,
     rgba(255, 255, 255, 0.93) 11.2%,
     rgb(63, 61, 61) 78.9%
   );
-  /* background-image: url(/barbecue.svg); */
   background-repeat: no-repeat;
-  /* background-size: cover; */
-  /* background-position: center; */
-
   min-height: 100vh;
 }
