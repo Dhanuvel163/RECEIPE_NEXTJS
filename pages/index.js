@@ -72,7 +72,7 @@ export default function Home({receipes,pages}) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  let [page,setpage] = useState(parseInt(router.query?.page))
+  let [page,setpage] = useState(parseInt(router.query?.page) || 1)
   const handleChange = (e,v) => {
     setpage(v)
     if(router.query?.query){
@@ -86,6 +86,7 @@ export default function Home({receipes,pages}) {
       setpage(parseInt(1))
     }
   }
+  
   return (
     <div>
       <Head>
@@ -130,17 +131,17 @@ export default function Home({receipes,pages}) {
       }
       {
       (!router.query?.query) &&
-        <Container style={{marginTop:20}}>
-          <h2 style={{color:'rgb(66, 46, 117)',fontWeight:'bold',textShadow:'0px 0px 1.3px black',textTransform:'uppercase'}}>
+        <Container style={{marginTop:40}}>
+          <p style={{color:'rgb(66, 46, 117)',fontWeight:'bold',textShadow:'0px 0px 1.3px black',textTransform:'uppercase',fontSize:'27px'}}>
             Trending Receipes
-          </h2>
+          </p>
           <Divider/>
         </Container>
       }
       {
       (router.query?.query) &&
         <Container>
-          <h2 style={{color:'rgb(66, 46, 117)',fontWeight:'bold',textShadow:'0px 0px 1.3px black',textTransform:'uppercase'}}>
+          <h2 style={{color:'rgb(66, 46, 117)',fontWeight:'bold',textShadow:'0px 0px 1.3px black',textTransform:'uppercase',fontSize:'27px'}}>
             Results for {router.query?.query}
           </h2>
           <Divider/>

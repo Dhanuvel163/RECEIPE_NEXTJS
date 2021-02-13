@@ -4,17 +4,22 @@ import Typography from '@material-ui/core/Typography';
 // import EmojiFoodBeverageIcon from '@material-ui/icons/EmojiFoodBeverage';
 import FastfoodIcon from '@material-ui/icons/Fastfood';
 import IconButton from '@material-ui/core/IconButton';
+import Link from 'next/link'
 export default function Layout(props) {
     return (
         <div >
             <AppBar position="static">
                 <Toolbar>
-                <IconButton edge="start" color="inherit" aria-label="menu">
-                    <FastfoodIcon />
-                </IconButton>
-                <Typography variant="h5" style={{fontWeight:'bold'}}> 
-                    Receipo
-                </Typography>
+                <Link href="/">
+                    <>
+                    <IconButton edge="start" color="inherit" aria-label="menu">
+                        <FastfoodIcon />
+                    </IconButton>
+                    <Typography variant="h5" style={{fontWeight:'bold'}}> 
+                        Receipo
+                    </Typography>
+                    </>
+                </Link>
                 </Toolbar>
             </AppBar>
             {props.children}
