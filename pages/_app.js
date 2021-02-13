@@ -32,6 +32,15 @@ export default function MyApp(props) {
       <Head>
         <title>Receipe App</title>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
+
+        <meta charset="utf-8" />
+        <link rel="image_src" href="%PUBLIC_URL%/logo192.png"/>
+        <link rel="icon" href="%PUBLIC_URL%/logo192.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#000000" />
+        <link rel="apple-touch-icon" href="%PUBLIC_URL%/assets/lawlogo192.webp" />
+        <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
