@@ -44,6 +44,7 @@ export default function MyApp(props) {
         <link rel="image_src" href="/logo192.png"/>
         <link rel="icon" href="/logo192.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="A Website to search for Receipes !" />
         <meta name="theme-color" content="#000000" />
         <link rel="apple-touch-icon" href="/assets/lawlogo192.webp" />
         <link rel="manifest" href="/manifest.json" />
