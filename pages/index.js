@@ -130,7 +130,7 @@ export default function Home({receipes,pages}) {
       </div>      
       }
       {
-      (!router.query?.query) &&
+      (!router.query?.query && receipes.length !== 0 ) &&
         <Container style={{marginTop:40}}>
           <p style={{color:'rgb(66, 46, 117)',fontWeight:'bold',textShadow:'0px 0px 1.3px black',textTransform:'uppercase',fontSize:'27px'}}>
             Trending Receipes
@@ -139,7 +139,7 @@ export default function Home({receipes,pages}) {
         </Container>
       }
       {
-      (router.query?.query) &&
+      (router.query?.query && receipes.length !== 0 ) &&
         <Container>
           <h2 style={{color:'rgb(66, 46, 117)',fontWeight:'bold',textShadow:'0px 0px 1.3px black',textTransform:'uppercase',fontSize:'27px'}}>
             Results for {router.query?.query}
