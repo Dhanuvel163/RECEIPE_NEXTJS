@@ -10,7 +10,6 @@ import Chip from '@material-ui/core/Chip';
 import Button from '@material-ui/core/Button';
 import Link from 'next/link'
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
-// import Image from 'next/image' 
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -18,7 +17,6 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import EmojiFoodBeverageIcon from '@material-ui/icons/EmojiFoodBeverage';
-
 // import SwipeableViews from 'react-swipeable-views';
 export default function Home({receipe}) {
   return (
@@ -31,7 +29,7 @@ export default function Home({receipe}) {
 
         <div>
             <Container>
-            <h1>{receipe.title}</h1>
+            <h1 style={{color:'white'}}>{receipe.title}</h1>
             <Divider/>
 
             <Paper elevation={0} style={{overflow:'hidden',marginTop:30}}>
@@ -43,11 +41,11 @@ export default function Home({receipe}) {
                     <Grid item xs={12} sm={6} style={{paddingLeft:30}}>
                       <h3>Diets</h3>
                       {
-                        receipe.diets.map((d,i)=>(<Chip key={i} style={{marginLeft:5}} label={d} color="primary"/>))
+                        receipe.diets.map((d,i)=>(<Chip key={i} style={{marginLeft:5,marginTop:5}} label={d} color="primary"/>))
                       }
                       <h3>Dish Types</h3>
                       {
-                        receipe.dishTypes.map((d,i)=>(<Chip key={i} style={{marginLeft:5}} label={d} color="primary"/>))
+                        receipe.dishTypes.map((d,i)=>(<Chip key={i} style={{marginLeft:5,marginTop:5}} label={d} color="primary"/>))
                       }
                       <h3>Type</h3>
                       <Chip label={receipe.vegetarian?'Vegetarian':'Non Vegetarian'} color="secondary"/> 
@@ -74,9 +72,6 @@ export default function Home({receipe}) {
                           </ListItem>
                       ))}
                       </List>
-                        {/* <ul>
-                        {receipe.extendedIngredients.map((d,i)=>(<li key={i}>{d.original}</li>))}
-                        </ul> */}
                       </div>
 
                     </Grid>
@@ -90,7 +85,7 @@ export default function Home({receipe}) {
                       <h3>Summary</h3>
                       <div dangerouslySetInnerHTML={{__html: `${receipe.summary}`}}></div>                      
                       <h3>Source</h3>
-                      <p><b style={{marginRight:10,color:'rgb(66, 46, 117)'}}>{receipe.sourceName}</b> 
+                      <p><b style={{marginRight:10}}>{receipe.sourceName}</b> 
                       <Link href={receipe.sourceUrl}>
                       <Button size="small" color="primary" variant="outlined">More Info
                       <ArrowRightIcon/>

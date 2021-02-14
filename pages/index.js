@@ -123,7 +123,7 @@ export default function Home({receipes,pages}) {
       {receipes.length === 0  &&
       <div className={classes.alignCenter} style={{marginTop:20}}>
         <div>
-          <h1 style={{textAlign:'center',color:'rgb(66, 46, 117)',fontWeight:'bold',textShadow:'1px 1px 3px black'}}>
+          <h1 style={{textAlign:'center',color:'white',fontWeight:'bold',textShadow:'1px 1px 3px black'}}>
             OOPS ! NO DATA</h1>
           <img style={{maxWidth:'100vw'}} src="/no.svg"/>
         </div>
@@ -132,7 +132,7 @@ export default function Home({receipes,pages}) {
       {
       (!router.query?.query && receipes.length !== 0 ) &&
         <Container style={{marginTop:40}}>
-          <p style={{color:'rgb(66, 46, 117)',fontWeight:'bold',textShadow:'0px 0px 1.3px black',textTransform:'uppercase',fontSize:'27px'}}>
+          <p style={{color:'white',fontWeight:'bold',textShadow:'0px 0px 1.3px black',textTransform:'uppercase',fontSize:'27px'}}>
             Trending Receipes
           </p>
           <Divider/>
@@ -141,7 +141,7 @@ export default function Home({receipes,pages}) {
       {
       (router.query?.query && receipes.length !== 0 ) &&
         <Container>
-          <h2 style={{color:'rgb(66, 46, 117)',fontWeight:'bold',textShadow:'0px 0px 1.3px black',textTransform:'uppercase',fontSize:'27px'}}>
+          <h2 style={{color:'white',fontWeight:'bold',textShadow:'0px 0px 1.3px black',textTransform:'uppercase',fontSize:'27px'}}>
             Results for {router.query?.query}
           </h2>
           <Divider/>
