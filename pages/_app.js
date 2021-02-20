@@ -40,7 +40,7 @@ export default function MyApp(props) {
         <title>Receipe App</title>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
 
-        <meta charset="utf-8" />
+        <meta charSet="utf-8" />
         <link rel="image_src" href="/logo192.png"/>
         <link rel="icon" href="/logo192.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
