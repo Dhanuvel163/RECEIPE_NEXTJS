@@ -26,9 +26,9 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Link from 'next/link'
 import Pagination from '@material-ui/lab/Pagination';
 import Container from '@material-ui/core/Container';
-export const config = {
-    unstable_runtimeJS:false
-}
+// export const config = {
+//     unstable_runtimeJS:false
+// }
 const useStyles = makeStyles((theme) => ({
     alignCenter:{
       display: 'flex',width: '100%',justifyContent:'center',

@@ -5,9 +5,9 @@ import Typography from '@material-ui/core/Typography';
 import FastfoodIcon from '@material-ui/icons/Fastfood';
 import IconButton from '@material-ui/core/IconButton';
 import Link from 'next/link'
-export const config = {
-    unstable_runtimeJS:false
-}
+// export const config = {
+//     unstable_runtimeJS:false
+// }
 export default function Layout(props) {
     return (
         <div >

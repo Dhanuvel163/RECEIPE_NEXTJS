@@ -18,9 +18,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import EmojiFoodBeverageIcon from '@material-ui/icons/EmojiFoodBeverage';
 // import SwipeableViews from 'react-swipeable-views';
-export const config = {
-    unstable_runtimeJS:false
-}
+// export const config = {
+//     unstable_runtimeJS:false
+// }
 export default function Home({receipe}) {
   return (
     <div>
